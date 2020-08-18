@@ -28,7 +28,7 @@ app.post("/repositories", (request, response) => {
 });
 
 app.put("/repositories/:id", (request, response) => {
-  const { title, url, techs, likes } = request.body;
+  const { title, url, techs } = request.body;
   const { id } = request.params;
   const repository = repositories.find((item) => item.id === id);
 
@@ -46,7 +46,12 @@ app.put("/repositories/:id", (request, response) => {
 });
 
 app.delete("/repositories/:id", (request, response) => {
-  // TODO
+  const { id } = request.params;
+  const repositoryIndex = repositories.findIndex((item) => item.id === id);
+
+  if (repositoryIndex < 0) {
+    return response.status(400).send();
+  }
 });
 
 app.post("/repositories/:id/like", (request, response) => {
