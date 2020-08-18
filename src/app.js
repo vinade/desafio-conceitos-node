@@ -28,12 +28,22 @@ app.post("/repositories", (request, response) => {
 });
 
 app.put("/repositories/:id", (request, response) => {
+  const { title, url, techs, likes } = request.body;
   const { id } = request.params;
-  const itemIndex = repositories.findIndex((item) => item.id === id);
+  const repository = repositories.find((item) => item.id === id);
 
-  if (itemIndex < 0) {
+  if (repository === undefined) {
     return response.status(400).send();
   }
+
+  Object.assign(repository, {
+    title,
+    url,
+    techs,
+    likes,
+  });
+
+  return response.status(200).json(repository);
 });
 
 app.delete("/repositories/:id", (request, response) => {
