@@ -40,7 +40,6 @@ app.put("/repositories/:id", (request, response) => {
     title,
     url,
     techs,
-    likes,
   });
 
   return response.status(200).json(repository);
