@@ -64,6 +64,10 @@ app.post("/repositories/:id/like", (request, response) => {
   if (repository === undefined) {
     return response.status(400).send();
   }
+
+  repository.likes++;
+
+  return response.status(200).json(repository);
 });
 
 module.exports = app;
