@@ -28,7 +28,12 @@ app.post("/repositories", (request, response) => {
 });
 
 app.put("/repositories/:id", (request, response) => {
-  // TODO
+  const { id } = request.params;
+  const itemIndex = repositories.findIndex((item) => item.id === id);
+
+  if (itemIndex < 0) {
+    return response.status(400).send();
+  }
 });
 
 app.delete("/repositories/:id", (request, response) => {
